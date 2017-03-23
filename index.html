@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mars Rover Control Center</title>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+
+	
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+	<div class="container">
+		<h3 class="text-center mb-5">
+			Mars Rover Control Center
+			<small class="text-muted">by Matteo Stohlman</small>
+		</h3>
+		<div class="row">
+
+			<div class="col-xs-12 col-sm-6">
+				<u><h5 class="text-center">Rover Deployment Dashboard</h5></u>
+				<div class="row"> <!-- Rover Creation Controls -->
+					<div class="col-sm-12 col-xs-12 text-center">				
+						<form class="form">
+							<div class="form-group row text-center">
+								<div class="col-sm-12">
+									<label for='roverDropX' class="control-label inline">X Position  <small class="text-muted">(max 47)</small></label>
+									<input type="number" id="roverDropX" placeholder="0" class="form-control inline inline_width" name='x' min="1" max="47">
+								</div>
+							</div>
+							<div class="form-group row text-center">
+								<div class="col-sm-12">
+									<label for='roverDropY' class="control-label inline">Y Position  <small class="text-muted">(max 44)</small></label>
+									<input type="number" id="roverDropY" placeholder="0" class="form-control inline inline_width" name="y" min="1" max="44">
+								</div>
+							</div>
+							<div class="row">
+						    	<div class="col-centered">
+							      <button type="button" class="btn btn-success" onclick="createRover(this.parentNode)">Dispatch Rover</button>
+							    </div>
+							 </div>
+						</form>
+					</div>
+				</div>
+
+				<u><h5 class="text-center mt-5">Rover Command Dashboard</h5></u>
+				<div class="row"><!-- Rover Navigation -->
+					<div class="col-sm-8 col-centered col-xs-12 mb-5">				
+						<ul class="nav nav-pills nav-fill">
+							<li class="nav-item">
+							  <a class="nav-link" href="#">Rover 1</a>
+							</li>
+							<li class="nav-item">
+							  <a class="nav-link" href="#">Rover 2</a>
+							</li>
+							<li class="nav-item">
+							  <a class="nav-link" href="#">Rover 3</a>
+							</li>
+							<li class="nav-item">
+							  <a class="nav-link" href="#">Rover 4</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="row"><!-- Rotation and Movement Buttons -->
+					<div class="col-xs-4 col-centered"><!-- Left Right Rotate -->
+						<button type="button" class="btn btn-default" onclick="rotate('L')"><span>&#8630;</span> </button>
+						<button type="button" class="btn btn-default" onclick="rotate('R')"><span>&#8631;</span> </button>
+						<button type="button" class="btn btn-default" onclick="move()">MOVE</button>						
+					</div>
+				</div>
+
+				<div class="row"><!-- Command Text -->
+					<div class="col-xs-8 col-sm-10 col-centered">
+						<input type="text" id="command_input" class="form-control mt-4 text-center col-sm-9 inline" placeholder="command">
+						<button type="button" class="btn btn-warning inline" onclick='clearCommands()'>Clear</button>
+					</div>
+				</div>
+
+				<div class="row"><!-- Command Submit -->
+					<div class="col-xs-12 mt-3 col-centered">
+						<button type="button" class="btn btn-success" onclick="updatePlateau()">Send Directions</button>
+					</div>
+				</div>
+			</div>
+			
+
+			<div class="col-xs-12 col-sm-6 lightgrey pt-3 pl-3">
+				<h5 id=roverName class="text-success bg-inverse">Rover Name:</h5>
+				<h6 id=roverInfo class="text-success bg-inverse">Info</h6> 
+				<canvas id="canvas"></canvas>
+				<script src="script.js"></script>
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	<script src="script.js"></script>
+</body>
+
+</html>

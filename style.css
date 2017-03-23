@@ -1,0 +1,22 @@
+.outer-container {
+	background-color: lightblue;
+}
+.lightgrey{
+	background-image: url(http://www.solstation.com/solsys/mars2lava.jpg);
+}
+.col-centered{
+float: none;
+margin: 0 auto;
+}
+.vcenter{
+	margin-top: 25%;
+}
+.inline{
+	display: inline-block;
+}
+.inline_width{
+	width: 20%;
+}
+body{
+	background-color:#f9f9f9;
+}
