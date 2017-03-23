@@ -99,46 +99,44 @@ function Rover(number, location, orientation) {
 }
 function updatePlateau(){
 	var activeRoverName = $('.nav-pills .active').text();
-	if(activeRover==undefined){
-		alert('Commander, we need to select a rover before submitting orders.')
+	if(activeRoverName==undefined){
+		alert('Commander, we need to select a rover before submitting orders.');
+		return;
 	}
-	console.log(activeRoverName);
+	if(localStorage.getItem(activeRoverName)==undefined){
+		alert('Commander, we have not yet launched this Rover.');
+	}
 	var activeRover= JSON.parse(localStorage.getItem(activeRoverName));
-	//console.log(localStorage.getItem(activeRoverName).loca);
 	var commandInput = $("#command_input").val();
 	var canvas = document.getElementById("canvas");   // the canvas where game will be drawn
 	var context = canvas.getContext("2d"); 
 	context.fillStyle="00ff00";
 	var playerYPos=activeRover.location[1]*tileSize;				// converting Y player position from tiles to pixels
 	var playerXPos=activeRover.location[0]*tileSize;
-	//console.log(currentX+","+currentY);
 	context.fillRect(playerXPos,playerYPos,tileSize,tileSize);
 	for(step=0;step<commandInput.length;step++){
+		if(commandInput[step]!="M" && commandInput[step]!="L" && commandInput[step]!="R" ){
+			alert('Commander, we have received invalid input! Awaiting new orders.');
+			return;
+		}
+	}
+	for(step=0;step<commandInput.length;step++){
 		var currentStep = commandInput[step];
-		//console.log(currentStep);
 		var currentX = Number(activeRover.location[0]);
 		var currentY = Number(activeRover.location[1]);
-		//console.log(activeRover.location);
 		var currentOrientationNumber = orientations.indexOf(activeRover.orientation);
 		switch(currentStep){
 			case "L": 
-				console.log("L Found");
 				if (currentOrientationNumber-1>=0){var newOrientationNumber=Number(currentOrientationNumber)-1;}
 				else{newOrientationNumber=3}
 				activeRover.orientation=orientations[newOrientationNumber];
 				break;
 			case "R":
-				console.log("R Found");
 				if (currentOrientationNumber+1<=3){var newOrientationNumber=Number(currentOrientationNumber)+1;}
 				else{newOrientationNumber=0}
-				//console.log('New Orientation Number: '+newOrientationNumber);
 				activeRover.orientation=orientations[newOrientationNumber];
-				//console.log('O Number SHould be updated to E');
-				//console.log(activeRover);
 				break;
 			case "M":
-				console.log("M Found");
-				console.log('Switching through M value of current newOrientationNumber: '+currentOrientationNumber);
 				switch(currentOrientationNumber){
 					case 0:
 						currentY-=1;
@@ -153,18 +151,14 @@ function updatePlateau(){
 						currentX-=1;
 						break;
 				}
-			default:
-				alert('Commander, we have received invalid input.');
-				return;
-			activeRover.location=[currentX,currentY];
+				activeRover.location=[currentX,currentY];
 
-			var playerYPos=currentY*tileSize;				// converting Y player position from tiles to pixels
-			var playerXPos=currentX*tileSize;
-			//console.log(currentX+","+currentY);
-			context.fillStyle="#00ff00";
-			context.fillRect(playerXPos,playerYPos,tileSize,tileSize);
+				var playerYPos=currentY*tileSize;				// converting Y player position from tiles to pixels
+				var playerXPos=currentX*tileSize;
+				context.fillStyle="#00ff00";
+				context.fillRect(playerXPos,playerYPos,tileSize,tileSize);
+				break;			
 		}
-		//console.log(activeRover.location);
 		localStorage.removeItem(activeRoverName);
 		localStorage.setItem(activeRoverName,JSON.stringify(activeRover));
 		
