@@ -83,7 +83,6 @@ function createRover(){
 	}
 	var newRover = new Rover(roverCount,[x,y],"N");
 	localStorage.setItem("Rover "+roverCount,JSON.stringify(newRover));
-	//console.log("Rover "+roverCount+" contains: "+JSON.parse(localStorage.getItem("Rover "+roverCount)).location);
 	var canvas = document.getElementById("canvas");   // the canvas where game will be drawn
 	var context = canvas.getContext("2d"); 
 	var playerYPos=y*tileSize;				// converting Y player position from tiles to pixels
@@ -162,14 +161,11 @@ function updatePlateau(){
 		localStorage.removeItem(activeRoverName);
 		localStorage.setItem(activeRoverName,JSON.stringify(activeRover));
 		
-	console.log(localStorage.getItem(activeRoverName));
 	//sleep(1000);
 	}
 	context.fillStyle="#006400";
-	console.log(currentX+","+currentY);
 	context.fillRect(playerXPos,playerYPos,tileSize,tileSize);
 
-	//console.log(commandInput);
 	
 		
 	}
